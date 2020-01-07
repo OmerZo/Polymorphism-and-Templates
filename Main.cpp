@@ -1,5 +1,5 @@
-//#include "Date.h"
-//#include "IComparable.h"
+#include "Date.h"
+#include "IComparable.h"
 //#include "IPrintable.h"
 //#include "Interval.h"
 #include <iostream>
@@ -9,6 +9,13 @@ using namespace std;
 
 void testDate() {
 	Date independence(14, 5, 1948);
+	Date independence2(15, 5, 1948);
+	cout << (independence < independence2) << endl;
+	cout << (independence > independence2) << endl;
+	cout << (independence <= independence2) << endl;
+	cout << (independence >= independence2) << endl;
+	cout << (independence != independence2) << endl;
+	cout << (independence == independence2) << endl;
 	//Date otherDate = independence;
 	//cout << "Independence:" << independence << ", Other: " << otherDate << endl;
 	//otherDate.setMonth(2);

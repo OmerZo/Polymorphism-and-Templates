@@ -26,10 +26,10 @@
     <ClInclude Include="Date.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IComparable.h">
+    <ClInclude Include="IPrintable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IPrintable.h">
+    <ClInclude Include="IComparable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
