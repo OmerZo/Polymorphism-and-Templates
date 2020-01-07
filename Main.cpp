@@ -9,21 +9,21 @@ using namespace std;
 
 void testDate() {
 	Date independence(14, 5, 1948);
-	Date otherDate = independence;
-	cout << "Independence:" << independence << ", Other: " << otherDate << endl;
-	otherDate.setMonth(2);
-	cout << "Other date: " << otherDate << endl;
-	otherDate.setDay(29);
-	cout << "Other date: " << otherDate << endl;
-	otherDate.setYear(1947);
-	cout << "Other date: " << otherDate << endl;
-	otherDate = Date(24, 1, 1959);
-	cout << "Other date: " << otherDate << endl;
-	cout << "Comparing using polymorphism" << endl;
-	IComparable<Date>* indP = dynamic_cast <IComparable<Date>*> (&independence);
-	cout << "Is independence <= otherDate ? " << (*indP <= otherDate) << endl;
-	IComparable<Date>* otherP = dynamic_cast <IComparable<Date>*> (&otherDate);
-	cout << "Is other date <= independence ? " << (*otherP <= independence) << endl;
+	//Date otherDate = independence;
+	//cout << "Independence:" << independence << ", Other: " << otherDate << endl;
+	//otherDate.setMonth(2);
+	//cout << "Other date: " << otherDate << endl;
+	//otherDate.setDay(29);
+	//cout << "Other date: " << otherDate << endl;
+	//otherDate.setYear(1947);
+	//cout << "Other date: " << otherDate << endl;
+	//otherDate = Date(24, 1, 1959);
+	//cout << "Other date: " << otherDate << endl;
+	//cout << "Comparing using polymorphism" << endl;
+	//IComparable<Date>* indP = dynamic_cast <IComparable<Date>*> (&independence);
+	//cout << "Is independence <= otherDate ? " << (*indP <= otherDate) << endl;
+	//IComparable<Date>* otherP = dynamic_cast <IComparable<Date>*> (&otherDate);
+	//cout << "Is other date <= independence ? " << (*otherP <= independence) << endl;
 }
 
 
