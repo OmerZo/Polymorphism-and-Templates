@@ -11,12 +11,12 @@ public:
 	//virtual bool test(Date&);
 
 	Date(int, int, int);
-	virtual bool operator < (const Date&) const;
-	virtual bool operator > (const Date&) const;
-	virtual bool operator <= (const Date&) const;
-	virtual bool operator >= (const Date&) const;
-	virtual bool operator != (const Date&) const;
-	virtual bool operator == (const Date&) const;
+	virtual bool operator < (const IComparable<Date>&) const;
+	virtual bool operator > (const IComparable<Date>&) const;
+	virtual bool operator <= (const IComparable<Date>&) const;
+	virtual bool operator >= (const IComparable<Date>&) const;
+	virtual bool operator != (const IComparable<Date>&) const;
+	virtual bool operator == (const IComparable<Date>&) const;
 
 
 private:
