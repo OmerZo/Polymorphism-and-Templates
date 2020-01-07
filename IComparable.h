@@ -1,19 +1,17 @@
-#ifndef IComparable
-#define IComparable
+#ifndef ICOMPARABLE_H
+#define ICOMPARABLE_H
 
 template <class T>
 class IComparable
 {
-pablic:
+public:
 	virtual ~IComparable() {};
-	virtual bool operator<(const IComparable&) const = 0;
-	virtual bool operator>(const IComparable&) const = 0;
-	virtual bool operator<=(const IComparable&) const = 0;
-	virtual bool operator>=(const IComparable&) const = 0;
-	virtual bool operator!=(const IComparable&) const = 0;
-	virtual bool operator==(const IComparable&) const = 0;
-
-
+	virtual bool operator < (const IComparable&) const = 0;
+	//virtual bool operator > (const IComparable&) const = 0;
+	//virtual bool operator <= (const IComparable&) const = 0;
+	//virtual bool operator >= (const IComparable&) const = 0;
+	//virtual bool operator != (const IComparable&) const = 0;
+	//virtual bool operator == (const IComparable&) const = 0;
 };
 
-#endif // !IComparable
+#endif // !ICOMPARABLE_H

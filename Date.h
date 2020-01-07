@@ -1,7 +1,8 @@
 #ifndef DATE_H
 #define DATE_H
+#include "IComparable.h"
 
-class Date
+class Date : public IComparable<Date>
 {
 public:
 	Date();
