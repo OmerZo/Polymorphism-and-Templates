@@ -1,6 +1,6 @@
 #include "Date.h"
 #include "IComparable.h"
-//#include "IPrintable.h"
+#include "IPrintable.h"
 //#include "Interval.h"
 #include <iostream>
 #include <iomanip>
@@ -8,39 +8,33 @@ using namespace std;
 
 
 void testDate() {
-	Date independence(15, 6, 1947);
-	Date independence2(15, 5, 1948);
-	cout << (independence < independence2) << endl;
-	cout << (independence > independence2) << endl;
-	cout << (independence <= independence2) << endl;
-	cout << (independence >= independence2) << endl;
-	cout << (independence != independence2) << endl;
-	cout << (independence == independence2) << endl;
-	//Date otherDate = independence;
-	//cout << "Independence:" << independence << ", Other: " << otherDate << endl;
-	//otherDate.setMonth(2);
-	//cout << "Other date: " << otherDate << endl;
-	//otherDate.setDay(29);
-	//cout << "Other date: " << otherDate << endl;
-	//otherDate.setYear(1947);
-	//cout << "Other date: " << otherDate << endl;
-	//otherDate = Date(24, 1, 1959);
-	//cout << "Other date: " << otherDate << endl;
-	//cout << "Comparing using polymorphism" << endl;
-	//IComparable<Date>* indP = dynamic_cast <IComparable<Date>*> (&independence);
-	//cout << "Is independence <= otherDate ? " << (*indP <= otherDate) << endl;
-	//IComparable<Date>* otherP = dynamic_cast <IComparable<Date>*> (&otherDate);
-	//cout << "Is other date <= independence ? " << (*otherP <= independence) << endl;
+	Date independence(14, 5, 1948);
+	Date otherDate = independence;
+
+	cout << "Independence:" << independence << ", Other: " << otherDate << endl;
+	otherDate.setMonth(2);
+	cout << "Other date: " << otherDate << endl;
+	otherDate.setDay(29);
+	cout << "Other date: " << otherDate << endl;
+	otherDate.setYear(1947);
+	cout << "Other date: " << otherDate << endl;
+	otherDate = Date(24, 1, 1959);
+	cout << "Other date: " << otherDate << endl;
+	cout << "Comparing using polymorphism" << endl;
+	IComparable<Date>* indP = dynamic_cast <IComparable<Date>*> (&independence);
+	cout << "Is independence <= otherDate ? " << (*indP <= otherDate) << endl;
+	IComparable<Date>* otherP = dynamic_cast <IComparable<Date>*> (&otherDate);
+	cout << "Is other date <= independence ? " << (*otherP <= independence) << endl;
 }
 
 
-//void testDateInput() {
-//	Date otherDate(1, 1, 1);
-//	do {
-//		cin >> otherDate;
-//		cout << otherDate << endl;
-//	} while (otherDate != Date(1, 1, 1));
-//}
+void testDateInput() {
+	Date otherDate(1, 1, 1);
+	do {
+		cin >> otherDate;
+		cout << otherDate << endl;
+	} while (otherDate != Date(1, 1, 1));
+}
 
 
 //void testIntervalInt() {
@@ -96,8 +90,8 @@ void testDate() {
 
 int main() {
 	cout << boolalpha << setfill('0');
-	testDate();
-	cout << endl << endl;
+	//testDate();
+	//cout << endl << endl;
 	//testIntervalInt();
 	//cout << endl << endl;
 	//testDateInput();

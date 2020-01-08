@@ -9,6 +9,52 @@ Date::Date(int d, int m, int y)
 	this->year = y;
 }
 
+
+void Date::setDay(int d)
+{
+	this->day = d;
+}
+
+void Date::setMonth(int m)
+{
+	this->month = m;
+}
+
+void Date::setYear(int y)
+{
+	this->year = y;
+}
+
+
+int Date::getDay() const
+{
+	return this->day;
+}
+
+int Date::getMonth() const
+{
+	return this->month;
+}
+
+int Date::getYear() const
+{
+	return this->year;
+}
+
+
+void Date::output(const IPrintable& date)
+{
+	const Date* temp = dynamic_cast<const Date*>(&date);
+	cout << temp;
+}
+
+void Date::input(IPrintable& date)
+{
+	const Date* temp = dynamic_cast<const Date*>(&date);
+	cout << temp;
+}
+
+
 bool Date::operator < (const IComparable<Date>& other) const
 {
 	cout << "Date::operator <" << endl;
@@ -53,4 +99,20 @@ bool Date::operator == (const IComparable<Date>& other) const
 	cout << "Date::operator ==" << endl;
 	const Date* temp = dynamic_cast<const Date*>(&other);
 	return ((this->day == temp->day) && (this->month == temp->month) && (this->year == temp->year));
+}
+
+
+ostream& operator<<(ostream& os, const Date& date)
+{
+	(date.day < 10) ? (os << "0" << date.day) : (os << date.day);
+	os << "/";
+	(date.month < 10) ? (os << "0" << date.month) : (os << date.month);
+	os << "/";
+	os << date.year;
+	return os;
+}
+
+istream& operator>>(istream& in, Date& date)
+{
+	return in;
 }

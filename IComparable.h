@@ -1,7 +1,7 @@
 #ifndef ICOMPARABLE_H
 #define ICOMPARABLE_H
 
- template <class T>
+template <class T>
 class IComparable
 {
 public:

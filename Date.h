@@ -2,15 +2,27 @@
 #define DATE_H
 #include <iostream>
 #include "IComparable.h"
+#include "IPrintable.h"
 
 using namespace std;
 
-class Date : public IComparable<Date>
+class Date : public IComparable<Date>, public IPrintable
 {
 public:
-	//virtual bool test(Date&);
 
 	Date(int, int, int);
+
+	void setDay(int);
+	void setMonth(int);
+	void setYear(int);
+
+	int getDay() const;
+	int getMonth() const;
+	int getYear() const;
+
+	virtual void output(const IPrintable&);
+	virtual void input(IPrintable&);
+
 	virtual bool operator < (const IComparable<Date>&) const;
 	virtual bool operator > (const IComparable<Date>&) const;
 	virtual bool operator <= (const IComparable<Date>&) const;
@@ -18,6 +30,8 @@ public:
 	virtual bool operator != (const IComparable<Date>&) const;
 	virtual bool operator == (const IComparable<Date>&) const;
 
+	friend ostream& operator << (ostream&, const Date&);
+	friend istream& operator >> (istream&, Date&);
 
 private:
 	int day, month, year;
