@@ -13,9 +13,7 @@ bool Date::operator < (const IComparable<Date>& other) const
 {
 	cout << "Date::operator <" << endl;
 	const Date* temp = dynamic_cast<const Date*>(&other);
-	cout << "Date < this: d=" << this->day << " m=" << this->month << " y=" << this->year << endl;
-	//cout << "Date < d=" << d << " m=" << m << " y=" << y << endl;
-
+	cout << "Date < d=" << temp->day << " m=" << temp->month << " y=" << temp->year << endl;
 
 	if (this->year != temp->year)
 		return this->year < temp->year;
@@ -28,41 +26,31 @@ bool Date::operator < (const IComparable<Date>& other) const
 bool Date::operator > (const IComparable<Date>& other) const
 {
 	cout << "Date::operator >" << endl;
-	const Date* temp = dynamic_cast<const Date*>(&other);
-	cout << "this->day=" << this->day << endl;
-	cout << "dynamic_cast<Date*>(const &other)->day=" << dynamic_cast<const Date*>(&other)->day << endl;
-	
-	return temp < this;
+	return !((this->operator==(other)) || (this->operator<(other)));
 }
 
 bool Date::operator <= (const IComparable<Date>& other) const
 {
 	cout << "Date::operator <=" << endl;
-	cout << "this->day=" << this->day << endl;
-	cout << "dynamic_cast<Date*>(const &other)->day=" << dynamic_cast<const Date*>(&other)->day << endl;
-	return true;
+	return ((this->operator==(other)) || (this->operator<(other)));
+
 }
 
 bool Date::operator >= (const IComparable<Date>& other) const
 {
 	cout << "Date::operator >=" << endl;
-	cout << "this->day=" << this->day << endl;
-	cout << "dynamic_cast<Date*>(const &other)->day=" << dynamic_cast<const Date*>(&other)->day << endl;
-	return true;
+	return ((this->operator==(other)) || (this->operator>(other)));
 }
 
 bool Date::operator != (const IComparable<Date>& other) const
 {
 	cout << "Date::operator !=" << endl;
-	cout << "this->day=" << this->day << endl;
-	cout << "dynamic_cast<Date*>(const &other)->day=" << dynamic_cast<const Date*>(&other)->day << endl;
-	return true;
+	return !(this->operator==(other));
 }
 
 bool Date::operator == (const IComparable<Date>& other) const
 {
 	cout << "Date::operator ==" << endl;
-	cout << "this->day=" << this->day << endl;
-	cout << "dynamic_cast<Date*>(const &other)->day=" << dynamic_cast<const Date*>(&other)->day << endl;
-	return true;
+	const Date* temp = dynamic_cast<const Date*>(&other);
+	return ((this->day == temp->day) && (this->month == temp->month) && (this->year == temp->year));
 }

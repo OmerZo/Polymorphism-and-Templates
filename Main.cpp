@@ -8,11 +8,15 @@ using namespace std;
 
 
 void testDate() {
-	Date independence(15, 5, 1948);
+	Date independence(15, 6, 1947);
 	Date independence2(15, 5, 1948);
 	cout << (independence < independence2) << endl;
 	cout << (independence > independence2) << endl;
-	Date otherDate = independence;
+	cout << (independence <= independence2) << endl;
+	cout << (independence >= independence2) << endl;
+	cout << (independence != independence2) << endl;
+	cout << (independence == independence2) << endl;
+	//Date otherDate = independence;
 	//cout << "Independence:" << independence << ", Other: " << otherDate << endl;
 	//otherDate.setMonth(2);
 	//cout << "Other date: " << otherDate << endl;
