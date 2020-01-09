@@ -3,16 +3,17 @@
 
 Date::Date(int d, int m, int y)
 {
-	cout << "Date conc d=" << d << " m=" << m << " y=" << y << endl;
 	this->day = d;
 	this->month = m;
 	this->year = y;
 }
 
+
 void Date::getDateFromString(string str, int& d, int& m, int& y)
 {
 	d = m = y = 0;
 	int flag = 0;
+	bool flagMinus = false;
 
 	for (int i = 0; i < (int)str.size(); i++)
 	{
@@ -43,8 +44,37 @@ void Date::getDateFromString(string str, int& d, int& m, int& y)
 			}
 		}
 		else if (str[i] == '/')
+		{
+
+			switch (flag)
+			{
+			case 0:
+			{
+				if (flagMinus) d *= -1;
+				break;
+			}
+			case 1:
+			{
+				if (flagMinus) m *= -1;
+				break;
+			}
+			case 2:
+			{
+				if (flagMinus) y *= -1;
+				break;
+			}
+			default:
+				break;
+			}
+
+
 			flag++;
+			flagMinus = false;
+		}
+		else if (str[i] == '-')
+			flagMinus = true;
 	}
+	if (flagMinus) y *= -1;
 }
 
 bool Date::isLeapYear(int year)
@@ -55,6 +85,15 @@ bool Date::isLeapYear(int year)
 
 void Date::setDate(int d, int m, int y)
 {
+	if ((d < 1) || (d > 31)) throw ILLEGAL_DAY;
+	if ((m < 1) || (m > 12)) throw ILLEGAL_MONTH;
+	if (y < 1) throw ILLEGAL_YEAR;
+
+	if (this->isLeapYear(y) && m == 2 && d > 29) throw NOT_LEAP;
+	if (!this->isLeapYear(y) && m == 2 && d > 28) throw NOT_LEAP;
+
+	if ((m == 4 || m == 6 || m == 9 || m == 11) && (d > 30)) throw ILLEGAL_DAY;
+		
 	this->setDay(d);
 	this->setMonth(m);
 	this->setYear(y);
@@ -107,9 +146,7 @@ void Date::input(IPrintable& date)
 
 bool Date::operator < (const IComparable<Date>& other) const
 {
-	cout << "Date::operator <" << endl;
 	const Date* temp = dynamic_cast<const Date*>(&other);
-	cout << "Date < d=" << temp->day << " m=" << temp->month << " y=" << temp->year << endl;
 
 	if (this->year != temp->year)
 		return this->year < temp->year;
@@ -121,32 +158,27 @@ bool Date::operator < (const IComparable<Date>& other) const
 
 bool Date::operator > (const IComparable<Date>& other) const
 {
-	cout << "Date::operator >" << endl;
 	return !((this->operator==(other)) || (this->operator<(other)));
 }
 
 bool Date::operator <= (const IComparable<Date>& other) const
 {
-	cout << "Date::operator <=" << endl;
 	return ((this->operator==(other)) || (this->operator<(other)));
 
 }
 
 bool Date::operator >= (const IComparable<Date>& other) const
 {
-	cout << "Date::operator >=" << endl;
 	return ((this->operator==(other)) || (this->operator>(other)));
 }
 
 bool Date::operator != (const IComparable<Date>& other) const
 {
-	cout << "Date::operator !=" << endl;
 	return !(this->operator==(other));
 }
 
 bool Date::operator == (const IComparable<Date>& other) const
 {
-	cout << "Date::operator ==" << endl;
 	const Date* temp = dynamic_cast<const Date*>(&other);
 	return ((this->day == temp->day) && (this->month == temp->month) && (this->year == temp->year));
 }
@@ -168,7 +200,40 @@ istream& operator>>(istream& in, Date& date)
 	int d, m, y;
 
 	getline(in, str);
-	date.getDateFromString(str, d, m, y);
-	date.isLeapYear(y) ? date.setDate(d, m, y) : date.setDate(1,1,1);
+
+	try
+	{
+		date.getDateFromString(str, d, m, y);
+		date.setDate(d, m, y);
+	}
+	catch (FalutCode e)
+	{
+		switch (e)
+		{
+		case ILLEGAL_DAY:
+		{
+			cout << "Illegal day for month" << endl;
+			break;
+		}
+		case ILLEGAL_MONTH:
+		{
+			cout << "Illegal month" << endl;
+			break;
+		}
+		case ILLEGAL_YEAR:
+		{
+			cout << "Illegal year" << endl;
+			break;
+		}
+		case NOT_LEAP:
+		{
+			cout << "Not a leap year" << endl;
+			break;
+		}
+		default:
+			break;
+		}
+	}
+	
 	return in;
 }

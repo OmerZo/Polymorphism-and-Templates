@@ -7,13 +7,17 @@
 
 using namespace std;
 
+enum FalutCode { ILLEGAL_DAY = 1, ILLEGAL_MONTH, ILLEGAL_YEAR, NOT_LEAP };
+
 class Date : public IComparable<Date>, public IPrintable
 {
 public:
 
 	Date(int, int, int);
+
 	void getDateFromString(string, int&, int&, int&);
 	bool isLeapYear(int);
+
 
 	void setDay(int);
 	void setMonth(int);
