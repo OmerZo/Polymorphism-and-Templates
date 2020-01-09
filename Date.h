@@ -3,6 +3,7 @@
 #include <iostream>
 #include "IComparable.h"
 #include "IPrintable.h"
+#include <string>
 
 using namespace std;
 
@@ -11,6 +12,7 @@ class Date : public IComparable<Date>, public IPrintable
 public:
 
 	Date(int, int, int);
+	static void getDateFromString(string, int&, int&, int&);
 
 	void setDay(int);
 	void setMonth(int);

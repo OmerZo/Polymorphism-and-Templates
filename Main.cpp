@@ -95,5 +95,11 @@ int main() {
 	//testIntervalInt();
 	//cout << endl << endl;
 	//testDateInput();
+
+	Date d(1,1,1);
+	cout << "enter date: ";
+	cin >> d;
+	cout << endl << endl;
+	cout << d;
 	return 0;
 }

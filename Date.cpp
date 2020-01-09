@@ -9,6 +9,44 @@ Date::Date(int d, int m, int y)
 	this->year = y;
 }
 
+void Date::getDateFromString(string str, int& d, int& m, int& y)
+{
+	d = m = y = 0;
+	int flag = 0;
+
+	for (int i = 0; i < (int)str.size(); i++)
+	{
+		if (isdigit(str[i]))
+		{
+			switch (flag)
+			{
+			case 0:
+			{
+				d *= 10;
+				d += (str[i] - '0');
+				break;
+			}
+			case 1:
+			{
+				m *= 10;
+				m += (str[i] - '0');
+				break;
+			}
+			case 2:
+			{
+				y *= 10;
+				y += (str[i] - '0');
+				break;
+			}
+			default:
+				break;
+			}
+		}
+		else if (str[i] == '/')
+			flag++;
+	}
+}
+
 
 void Date::setDay(int d)
 {
@@ -114,5 +152,13 @@ ostream& operator<<(ostream& os, const Date& date)
 
 istream& operator>>(istream& in, Date& date)
 {
+	string str;
+	int d, m, y;
+
+	getline(in, str);
+	Date::getDateFromString(str, d, m, y);
+	date.setDay(d);
+	date.setMonth(m);
+	date.setYear(y);
 	return in;
 }
