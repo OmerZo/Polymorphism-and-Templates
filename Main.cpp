@@ -90,10 +90,10 @@ void testDateInput() {
 
 int main() {
 	cout << boolalpha << setfill('0');
-	//testDate();
-	//cout << endl << endl;
+	testDate();
+	cout << endl << endl;
 	//testIntervalInt();
-	//cout << endl << endl;
+	cout << endl << endl;
 	testDateInput();
 	return 0;
 }

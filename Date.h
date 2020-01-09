@@ -16,13 +16,11 @@ public:
 	Date(int, int, int);
 
 	void getDateFromString(string, int&, int&, int&);
-	bool isLeapYear(int);
-
 
 	void setDay(int);
 	void setMonth(int);
 	void setYear(int);
-	void setDate(int, int, int);
+	void checkDate(int, int, int) const;
 
 	int getDay() const;
 	int getMonth() const;

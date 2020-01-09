@@ -77,26 +77,18 @@ void Date::getDateFromString(string str, int& d, int& m, int& y)
 	if (flagMinus) y *= -1;
 }
 
-bool Date::isLeapYear(int year)
+void Date::checkDate(int d, int m, int y) const
 {
-	return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
-}
+	bool isLeapYear = (((y % 4 == 0) && (y % 100 != 0)) || (y % 400 == 0));
 
-
-void Date::setDate(int d, int m, int y)
-{
 	if ((d < 1) || (d > 31)) throw ILLEGAL_DAY;
 	if ((m < 1) || (m > 12)) throw ILLEGAL_MONTH;
 	if (y < 1) throw ILLEGAL_YEAR;
 
-	if (this->isLeapYear(y) && m == 2 && d > 29) throw NOT_LEAP;
-	if (!this->isLeapYear(y) && m == 2 && d > 28) throw NOT_LEAP;
+	if (isLeapYear && m == 2 && d > 29) throw NOT_LEAP;
+	if (!isLeapYear && m == 2 && d > 28) throw NOT_LEAP;
 
 	if ((m == 4 || m == 6 || m == 9 || m == 11) && (d > 30)) throw ILLEGAL_DAY;
-		
-	this->setDay(d);
-	this->setMonth(m);
-	this->setYear(y);
 }
 
 void Date::setDay(int d)
@@ -186,6 +178,39 @@ bool Date::operator == (const IComparable<Date>& other) const
 
 ostream& operator<<(ostream& os, const Date& date)
 {
+	try
+	{
+		date.checkDate(date.getDay(), date.getMonth(), date.getYear());
+	}
+	catch (FalutCode e)
+	{
+		switch (e)
+		{
+		case ILLEGAL_DAY:
+		{
+			cout << "Illegal day for month";
+			return os;
+		}
+		case ILLEGAL_MONTH:
+		{
+			cout << "Illegal month";
+			return os;
+		}
+		case ILLEGAL_YEAR:
+		{
+			cout << "Illegal year";
+			return os;
+		}
+		case NOT_LEAP:
+		{
+			cout << "Not a leap year";
+			return os;
+		}
+		default:
+			break;
+		}
+	}
+
 	(date.day < 10) ? (os << "0" << date.day) : (os << date.day);
 	os << "/";
 	(date.month < 10) ? (os << "0" << date.month) : (os << date.month);
@@ -201,39 +226,10 @@ istream& operator>>(istream& in, Date& date)
 
 	getline(in, str);
 
-	try
-	{
-		date.getDateFromString(str, d, m, y);
-		date.setDate(d, m, y);
-	}
-	catch (FalutCode e)
-	{
-		switch (e)
-		{
-		case ILLEGAL_DAY:
-		{
-			cout << "Illegal day for month" << endl;
-			break;
-		}
-		case ILLEGAL_MONTH:
-		{
-			cout << "Illegal month" << endl;
-			break;
-		}
-		case ILLEGAL_YEAR:
-		{
-			cout << "Illegal year" << endl;
-			break;
-		}
-		case NOT_LEAP:
-		{
-			cout << "Not a leap year" << endl;
-			break;
-		}
-		default:
-			break;
-		}
-	}
-	
+	date.getDateFromString(str, d, m, y);
+
+	date.setDay(d);
+	date.setMonth(m);
+	date.setYear(y);
 	return in;
 }
