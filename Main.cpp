@@ -94,12 +94,6 @@ int main() {
 	//cout << endl << endl;
 	//testIntervalInt();
 	//cout << endl << endl;
-	//testDateInput();
-
-	Date d(1,1,1);
-	cout << "enter date: ";
-	cin >> d;
-	cout << endl << endl;
-	cout << d;
+	testDateInput();
 	return 0;
 }

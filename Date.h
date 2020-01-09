@@ -12,11 +12,13 @@ class Date : public IComparable<Date>, public IPrintable
 public:
 
 	Date(int, int, int);
-	static void getDateFromString(string, int&, int&, int&);
+	void getDateFromString(string, int&, int&, int&);
+	bool isLeapYear(int);
 
 	void setDay(int);
 	void setMonth(int);
 	void setYear(int);
+	void setDate(int, int, int);
 
 	int getDay() const;
 	int getMonth() const;

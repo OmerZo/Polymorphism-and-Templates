@@ -47,6 +47,18 @@ void Date::getDateFromString(string str, int& d, int& m, int& y)
 	}
 }
 
+bool Date::isLeapYear(int year)
+{
+	return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
+}
+
+
+void Date::setDate(int d, int m, int y)
+{
+	this->setDay(d);
+	this->setMonth(m);
+	this->setYear(y);
+}
 
 void Date::setDay(int d)
 {
@@ -156,9 +168,7 @@ istream& operator>>(istream& in, Date& date)
 	int d, m, y;
 
 	getline(in, str);
-	Date::getDateFromString(str, d, m, y);
-	date.setDay(d);
-	date.setMonth(m);
-	date.setYear(y);
+	date.getDateFromString(str, d, m, y);
+	date.isLeapYear(y) ? date.setDate(d, m, y) : date.setDate(1,1,1);
 	return in;
 }
