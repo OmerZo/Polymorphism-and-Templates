@@ -1,7 +1,7 @@
 #include "Date.h"
 #include "IComparable.h"
 #include "IPrintable.h"
-//#include "Interval.h"
+#include "Interval.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -37,7 +37,7 @@ void testDateInput() {
 }
 
 
-//void testIntervalInt() {
+void testIntervalInt() {
 //	Interval<int> interval = Interval<int>(2, 1);
 //	cout << interval << endl;
 //	Interval<int> interval13(1, 3);
@@ -85,15 +85,15 @@ void testDateInput() {
 //	cout << "interval24 || interval45 = " << (interval24 || interval45) << endl;
 //	cout << "interval45 || interval13 = " << (interval45 || interval13) << endl;
 //	cout << "interval45 || interval24 = " << (interval45 || interval24) << endl;
-//}
+}
 
 
 int main() {
 	cout << boolalpha << setfill('0');
-	testDate();
-	cout << endl << endl;
-	//testIntervalInt();
-	cout << endl << endl;
-	testDateInput();
+	//testDate();
+	//cout << endl << endl;
+	testIntervalInt();
+	//cout << endl << endl;
+	//testDateInput();
 	return 0;
 }
