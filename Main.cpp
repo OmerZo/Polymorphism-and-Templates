@@ -39,7 +39,7 @@ void testDateInput() {
 
 void testIntervalInt() {
 	Interval<int> interval = Interval<int>(2, 1);
-//	cout << interval << endl;
+	cout << interval << endl;
 //	Interval<int> interval13(1, 3);
 //	Interval<int> interval24(2, 4);
 //	Interval<int> interval45(4, 5);

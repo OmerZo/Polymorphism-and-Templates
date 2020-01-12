@@ -23,6 +23,20 @@ public:
 	virtual bool operator != (const IComparable<T>&) const;
 	virtual bool operator == (const IComparable<T>&) const;
 
+	friend ostream& operator << (ostream& os, const Interval& inter)
+	{
+		cout << "ostream inline" << endl;
+		os << inter.x << ", " << inter.y << endl;
+		return os;
+	}
+
+
+	friend istream& operator >> (istream& in, Interval<T>& inter)
+	{
+		cout << "istream inline";
+		return in;
+	}
+
 private:
 	T x, y;
 };
@@ -41,6 +55,9 @@ Interval<T>::Interval(T x, T y)
 template<class T>
 void Interval<T>::output(const IPrintable& inter)
 {
+	const Interval<T>* temp = dynamic_cast<const Interval<T>*>(&inter);
+	cout << "test1";
+	//cout << temp;
 }
 
 template<class T>
@@ -83,3 +100,17 @@ bool Interval<T>::operator==(const IComparable<T>& other) const
 {
 	return false;
 }
+
+//template<class T>
+//ostream& operator << (ostream& os, const Interval<T>& interval)
+//{
+//	cout << "test1";
+//	//os << interval.x << ", " << interval.y << endl;
+//	return os;
+//}
+//
+//template <class T>
+//istream& operator >> (istream& in, Interval<T>& interval)
+//{
+//	return in;
+//}
