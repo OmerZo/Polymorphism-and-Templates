@@ -24,7 +24,7 @@ public:
 	virtual bool operator != (const IComparable<T>&) const;
 	virtual bool operator == (const IComparable<T>&) const;
 
-	string operator && (const Interval<T>&) const;
+	Interval<T> operator && (const Interval<T>&) const;
 	string operator || (const Interval<T>&) const;
 
 	bool isEmpty() const;
@@ -34,10 +34,12 @@ public:
 
 	friend ostream& operator << (ostream& os, const Interval& inter)
 	{
-		if (inter.x > inter.y)
+		if (inter.start > inter.end)
 			os << "Invalid interval";
-		else
-			os << "(" << inter.x << ", " << inter.y << ")";
+		else if (inter.start == inter.end)
+			os << "EMPTY";
+		else 
+			os << "(" << inter.start << ", " << inter.end << ")";
 		return os;
 	}
 
@@ -48,17 +50,17 @@ public:
 	}
 
 private:
-	T x, y;
+	T start, end;
 };
 
 #endif // !INTERVAL_H
 
 
 template <class T>
-Interval<T>::Interval(T x, T y)
+Interval<T>::Interval(T start, T end)
 {
-	this->x = x;
-	this->y = y;
+	this->start = start;
+	this->end = end;
 }
 
 template<class T>
@@ -111,30 +113,30 @@ bool Interval<T>::operator==(const IComparable<T>& other) const
 }
 
 template<class T>
-string Interval<T>::operator&&(const Interval<T>& inter) const
+Interval<T> Interval<T>::operator&&(const Interval<T>& inter) const
 {
 	if(!this->intersects(inter))
-		return "EMPTY";
+		return Interval<T>(inter.start, inter.start);
 
 	//if (this.contain(inter))
-		//return "(" + this->x + ", " + this->y + ")";
+		//return "(" + this->start + ", " + this->end + ")";
 
 	//if (inter.contain(this))
-		//return "(" + inter.x + ", " + inter.y + ")";
+		//return "(" + inter.start + ", " + inter.end + ")";
 
-	T x, y;
-	if ((this->x > inter.x) && (this->x < inter.y))
+	T start, end;
+	if ((this->start > inter.start) && (this->start < inter.end))
 	{
-		x = this->x;
-		y = inter.y;
+		start = this->start;
+		end = inter.end;
 	}
 	else
 	{
-		x = inter.x;
-		y = this->y;
+		start = inter.start;
+		end = this->end;
 	}
-	//return "(" + x + ", " + y + ")";
-	return x y;
+	//return "(" + start + ", " + end + ")";
+	return Interval<T>(start, end);
 }
 
 template<class T>
@@ -147,23 +149,23 @@ string Interval<T>::operator||(const Interval<T>& inter) const
 template<class T>
 bool Interval<T>::isEmpty() const
 {
-	return (this->x == this->y);
+	return (this->start == this->end);
 }
 
 template<class T>
 bool Interval<T>::isBefore(const Interval<T> &inter) const
 {
-	return (this->y <= inter.x);
+	return (this->end <= inter.start);
 }
 
 template<class T>
 bool Interval<T>::isAfter(const Interval<T> &inter) const
 {
-	return (inter.y <= this->x);
+	return (inter.end <= this->start);
 }
 
 template<class T>
 bool Interval<T>::intersects(const Interval<T>& inter) const
 {
-	return (((this->y > inter.x) && (this->y < inter.y)) || ((this->x > inter.x) && (this->x < inter.y)));
+	return (((this->end > inter.start) && (this->end < inter.end)) || ((this->start > inter.start) && (this->start < inter.end)));
 }
