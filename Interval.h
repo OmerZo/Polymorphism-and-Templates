@@ -25,12 +25,13 @@ public:
 	virtual bool operator == (const IComparable<T>&) const;
 
 	Interval<T> operator && (const Interval<T>&) const;
-	string operator || (const Interval<T>&) const;
+	Interval<T> operator || (const Interval<T>&) const;
 
 	bool isEmpty() const;
 	bool isBefore(const Interval<T>&) const;
 	bool isAfter(const Interval<T>&) const;
 	bool intersects(const Interval<T>&) const;
+	bool contains(T) const;
 
 	friend ostream& operator << (ostream& os, const Interval& inter)
 	{
@@ -118,11 +119,11 @@ Interval<T> Interval<T>::operator&&(const Interval<T>& inter) const
 	if(!this->intersects(inter))
 		return Interval<T>(inter.start, inter.start);
 
-	//if (this.contain(inter))
-		//return "(" + this->start + ", " + this->end + ")";
+	if (this->contains(inter.start) && this->contains(inter.end))
+		return Interval<T>(this->start, this->end);
 
-	//if (inter.contain(this))
-		//return "(" + inter.start + ", " + inter.end + ")";
+	if (inter.contains(this->start) && inter.contains(this->end))
+		return Interval<T>(inter.start, inter.end);
 
 	T start, end;
 	if ((this->start > inter.start) && (this->start < inter.end))
@@ -135,14 +136,19 @@ Interval<T> Interval<T>::operator&&(const Interval<T>& inter) const
 		start = inter.start;
 		end = this->end;
 	}
-	//return "(" + start + ", " + end + ")";
 	return Interval<T>(start, end);
 }
 
 template<class T>
-string Interval<T>::operator||(const Interval<T>& inter) const
+Interval<T> Interval<T>::operator||(const Interval<T>& inter) const
 {
-	return "operator||";
+	if (!this->intersects(inter))
+		return Interval<T>(inter.end, inter.start);
+	
+	T start, end;
+	start = (this->start < inter.start) ? this->start : inter.start;
+	end = (this->end > inter.end) ? this->end : inter.end;
+	return Interval<T>(start, end);
 }
 
 
@@ -168,4 +174,10 @@ template<class T>
 bool Interval<T>::intersects(const Interval<T>& inter) const
 {
 	return (((this->end > inter.start) && (this->end < inter.end)) || ((this->start > inter.start) && (this->start < inter.end)));
+}
+
+template<class T>
+bool Interval<T>::contains(T cont) const
+{
+	return ((this->start < cont) && (this->end > cont));
 }

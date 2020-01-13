@@ -46,9 +46,9 @@ void testIntervalInt() {
 	cout << interval13 << endl;
 	cout << interval24 << endl;
 	cout << interval45 << endl;
-//	cout << "Does " << interval13 << " contain " << 2 << "? " << interval13.contains(2) << endl;
-//	cout << "Does " << interval24 << " contain " << 2 << "? " << interval24.contains(2) << endl;
-//	cout << "Does " << interval45 << " contain " << 2 << "? " << interval45.contains(2) << endl;
+	cout << "Does " << interval13 << " contain " << 2 << "? " << interval13.contains(2) << endl;
+	cout << "Does " << interval24 << " contain " << 2 << "? " << interval24.contains(2) << endl;
+	cout << "Does " << interval45 << " contain " << 2 << "? " << interval45.contains(2) << endl;
 	cout << "Is " << interval13 << " before " << interval24 << "? "
 		<< interval13.isBefore(interval24) << endl;
 	cout << "Is " << interval13 << " before " << interval45 << "? "
@@ -90,10 +90,10 @@ void testIntervalInt() {
 
 int main() {
 	cout << boolalpha << setfill('0');
-	//testDate();
-	//cout << endl << endl;
+	testDate();
+	cout << endl << endl;
 	testIntervalInt();
-	//cout << endl << endl;
-	//testDateInput();
+	cout << endl << endl;
+	testDateInput();
 	return 0;
 }
