@@ -67,9 +67,6 @@ Interval<T>::Interval(T start, T end)
 template<class T>
 void Interval<T>::output(const IPrintable& inter)
 {
-	const Interval<T>* temp = dynamic_cast<const Interval<T>*>(&inter);
-	cout << "test1";
-	//cout << temp;
 }
 
 template<class T>
